@@ -10,6 +10,10 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserManageComponent } from './user-manage/user-manage.component';
 import { UserTileComponent } from './user-tile/user-tile.component';
 import { NotificationComponent } from './notification/notification.component';
+import { TaskComponent } from './task/task.component';
+import { TaskAddComponent } from './task-add/task-add.component';
+import { TaskEditComponent } from './task-edit/task-edit.component';
+import { TaskCardComponent } from './task-card/task-card.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { NotificationComponent } from './notification/notification.component';
     UserEditComponent,
     UserManageComponent,
     UserTileComponent,
-    NotificationComponent
+    NotificationComponent,
+    TaskComponent,
+    TaskAddComponent,
+    TaskEditComponent,
+    TaskCardComponent
   ],
   imports: [
     BrowserModule,
