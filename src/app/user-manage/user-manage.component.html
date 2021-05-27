@@ -1,0 +1,15 @@
+<div class="manage-users-wrapper container">
+
+    <div class="sidebar">
+        <p class="sidebar-heading">Your users</p>
+
+        <div class="sidebar-items">
+            <a [routerLink]="[user.id]" routerLinkActive="selected" class="sidebar-item" *ngFor="let user of users">{{ user.name }}</a>
+        </div>
+    </div>
+
+    <div class="content has-blurred-white-bg">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

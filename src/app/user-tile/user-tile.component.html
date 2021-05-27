@@ -1,0 +1,10 @@
+<a [href]="user" target="_blank" class="user-tile">
+    <div class="tile-icon" *ngIf="!faviconError">
+        <img [src]="tileIconSrc" alt="" (error)="faviconError=true">
+    </div>
+    <div class="tile-icon fallback" *ngIf="faviconError">
+        {{ user.name.toUpperCase()[0] }}
+    </div>
+    
+    <p class="tile-text">{{ user.name }}</p>
+</a>
