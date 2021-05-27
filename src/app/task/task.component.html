@@ -4,8 +4,8 @@
 
         <div class="task-list">
 
-            <a [routerLink]="[note.id]" *ngFor="let note of task">
-                <app-note-card [note]="note"></app-note-card>
+            <a [routerLink]="[task.id]" *ngFor="let task of task">
+                <app-task-card [task]="notaskte"></app-task-card>
             </a>
             
         </div>

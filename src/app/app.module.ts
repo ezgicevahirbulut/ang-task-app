@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {StoreModule} from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,8 @@ import { TaskComponent } from './task/task.component';
 import { TaskAddComponent } from './task-add/task-add.component';
 import { TaskEditComponent } from './task-edit/task-edit.component';
 import { TaskCardComponent } from './task-card/task-card.component';
+import { ActivatedRoute } from '@angular/router';
+import { taskReducer } from './task/store/tasks.reducer';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { TaskCardComponent } from './task-card/task-card.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({addTask: taskReducer }),
+    ActivatedRoute
   ],
   providers: [],
   bootstrap: [AppComponent]
