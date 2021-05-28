@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
+import { fromEvent, Subscription, Observable, from } from 'rxjs';
 import { User } from './user.model';
 
 @Injectable({
@@ -7,8 +7,7 @@ import { User } from './user.model';
 })
 export class UserService implements OnDestroy {
 
-  users: User[] = []
-
+  const users = from(fetch)
   storageListenSub: Subscription
   
   constructor() {
@@ -29,7 +28,7 @@ export class UserService implements OnDestroy {
   }
 
   getuser(id: string) {
-    return this.users.find(b => b.id === id)
+    return this.users.next(b => b.id === id)
   }
 
   adduser(user: User) {

@@ -16,7 +16,7 @@ import { TaskAddComponent } from './task-add/task-add.component';
 import { TaskEditComponent } from './task-edit/task-edit.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 import { ActivatedRoute } from '@angular/router';
-import { taskReducer } from './task/store/tasks.reducer';
+import { taskReducer } from './store/tasks.reducer';
 
 @NgModule({
   declarations: [

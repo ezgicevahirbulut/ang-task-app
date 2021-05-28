@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 export class TaskComponent implements OnInit {
 
   tasks: Observable<{tasks: Task[]}>;
+  
   constructor(private taskService:TaskService,
     private store:Store<{addTasks: {tasks:Task []}}>) {
 
