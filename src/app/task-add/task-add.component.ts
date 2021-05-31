@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,6 +15,8 @@ import { TaskService } from '../shared/task.service';
 export class TaskAddComponent implements OnInit {
 
   showValidationErrors!: boolean;
+
+  public task$:Observable<Task[]>
 
   constructor(
     private taskService:TaskService,

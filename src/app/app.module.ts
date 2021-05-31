@@ -17,6 +17,7 @@ import { TaskEditComponent } from './task-edit/task-edit.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 import { ActivatedRoute } from '@angular/router';
 import { taskReducer } from './store/tasks.reducer';
+import { DenemeComponent } from './deneme/deneme.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { taskReducer } from './store/tasks.reducer';
     TaskComponent,
     TaskAddComponent,
     TaskEditComponent,
-    TaskCardComponent
+    TaskCardComponent,
+    DenemeComponent
   ],
   imports: [
     BrowserModule,

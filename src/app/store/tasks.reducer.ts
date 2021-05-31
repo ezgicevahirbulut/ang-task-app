@@ -4,7 +4,7 @@ import { Task } from "../shared/task.model";
 import {ADD_TASK} from "./tasks.actions";
 
 const initialState={
-    tasks:[]
+    task:[]
 };
 
 export function taskReducer(
@@ -14,7 +14,7 @@ export function taskReducer(
         case AddTask.ADD_TASK:
            return  {
                 ...state,
-                tasks: [...state.tasks, action.payload]
+                tasks: [...state.task, action.payload]
             };
             default:
                  return state;

@@ -5,9 +5,9 @@ export class User {
     name: string
     mail:string
 
-    constructor(name: string, url: string) {
+    constructor(name: string, mail: string) {
         this.id = uuidv4()
-        this.mail = this.mail
+        this.mail = mail
         
         this.name = name
     }

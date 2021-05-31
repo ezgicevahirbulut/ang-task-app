@@ -1,6 +1,9 @@
+import { User } from './../shared/user.model';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../shared/user.model';
+import { ActivatedRoute, Route, Params } from '@angular/router';
+import { Observable } from 'rxjs';
 import { UserService } from '../shared/user.service';
+
 
 @Component({
   selector: 'app-users',
@@ -8,13 +11,26 @@ import { UserService } from '../shared/user.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  id:number;
+  //users: User[] | undefined;
+  route: any;
 
-  users!: User[];
+  users:Observable<{user:User[]}>
+  user: Observable<User[]>;
   
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.users = this.userService.getusers()
+    this.user = this.userService.getusers()
+
+    this.route.params.subscribe(next, (params:Params)=>{
+      this.id=+params.id;
+    });
+
   }
 
 }
+function next(next: any, arg1: (params: Params) => void) {
+  throw new Error('Function not implemented.');
+}
+

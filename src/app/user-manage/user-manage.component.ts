@@ -1,3 +1,6 @@
+import { Store } from '@ngrx/store';
+import { User } from './../shared/user.model';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
@@ -9,13 +12,15 @@ import { UserService } from '../shared/user.service';
 })
 export class UserManageComponent implements OnInit {
 
-  users: User[]
+  user:Observable<{users:User[];}>
   
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    
+    ) { }
 
   ngOnInit(): void {
     
-    this.users = this.userService.getusers()
+    this.user = this.userService.getusers()
   }
 
 }

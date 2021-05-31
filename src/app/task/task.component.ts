@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
+
 export class TaskComponent implements OnInit {
 
   tasks: Observable<{ tasks: Task[]; }> | undefined;
@@ -23,7 +24,7 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.tasks = this.store.select('addTasks')
-    this.tasks=this.taskService.gettasks()
+    
   }
 
 }

@@ -6,6 +6,7 @@ import { User } from '../shared/user.model';
   templateUrl: './user-tile.component.html',
   styleUrls: ['./user-tile.component.scss']
 })
+
 export class UserTileComponent implements OnInit {
 
   @Input() user: User

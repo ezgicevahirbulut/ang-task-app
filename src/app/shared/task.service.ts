@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject, Observable, fromEvent } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { Task } from './task.model';
 
 @Injectable({
@@ -7,15 +8,18 @@ import { Task } from './task.model';
 })
 export class TaskService implements OnDestroy{
 
-  tasks:Task[]=[]
+  //private task:Task[]=[]
 
+  private task$:BehaviorSubject<Task[]> = new  BehaviorSubject<Task[]>([]);
   storageListenSub: Subscription
+  
+  task: any;
 
 
   constructor() { 
     this.loadState()
 
-    this.storageListenSub = fromEvent(window, 'storage')
+    this.storageListenSub =( fromEvent(window, 'storage') as Observable<StorageEvent>)
       .subscribe((event: StorageEvent) => {
         if (event.key === 'tasks') this.loadState()
       })
@@ -26,17 +30,21 @@ export class TaskService implements OnDestroy{
     if (this.storageListenSub) this.storageListenSub.unsubscribe()
 
   }
-  gettasks() {
-    return this.tasks
+  gettasks(): Observable<Task[]>{
+    return this.task$.asObservable();
   }
 
-  gettask(id: string) {
-    return this.tasks.find(n => n.id === id)
+  gettask(id: string):Observable<Task> {
+    //return this.tasks.find(n => n.id === id)
+    return this.task$.pipe(
+      map(tasks => tasks.find(t => t.id == id))
+    )
   }
 
-  addtask(task: Task) {
-    this.tasks.push(task)
+  addtask(task:Task):any {
+    //this.tasks.push(task)
 
+    this.task$.pipe([...this.task$.getValue(),task])
     this.saveState()
   }
 
@@ -47,26 +55,51 @@ export class TaskService implements OnDestroy{
     this.saveState()
   }
 
-  deletetask(id: string) {
-    const taskIndex = this.tasks.findIndex(n => n.id === id)
-    if (taskIndex == -1) return
+  deletetask(id: string){
 
-    this.tasks.splice(taskIndex, 1)
+  /*const taskIndex = this.task$.pipe(
+      filter(tasks => tasks =! null),
+      take(1),
+      switchMap(task => {
+        return next.handle(this.updatetask(req))
+      })
+    )
 
+   /*if (taskIndex == -1) return
+
+    this.task$.filter(taskIndex, 1)*/
+
+    //this.task$ = this.task$.filter((t: { id: string; }) => t.id !== id);
+
+    //this.task$ =this.task$.pipe(filter( tasks=> this.task$.find(t.id !== id) ))
+   
+
+    //this.task$.next(this.task$)
+
+
+    /*this.task$.splice(id,1);
+    this.task$.next(this.task$.splice());*/
+
+    
+
+    this.task$.next(null)
+    
     this.saveState()
   }
 
   saveState() {
-    localStorage.setItem('tasks', JSON.stringify(this.tasks))
+    localStorage.setItem('tasks', JSON.stringify(this.task$))
   }
 
   loadState() {
     try {
       const tasksInStorage = JSON.parse(localStorage.getItem('tasks'))
-      // if (!tasksInStorage) return
+      if (!tasksInStorage) return
 
-      this.tasks.length = 0 // clear the tasks array (while keeping the reference)
-      this.tasks.push(...tasksInStorage)
+      this.task.length = 0 // clear the tasks array (while keeping the reference)
+      this.task.push(...tasksInStorage)
+
+     
 
     } catch (e) {
       console.log('There was an error retrieving the tasks from localStorage')
@@ -74,3 +107,7 @@ export class TaskService implements OnDestroy{
     }
   }
 }
+function taskIndex(taskIndex: any, arg1: number) {
+  throw new Error('Function not implemented.');
+}
+

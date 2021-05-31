@@ -40,7 +40,7 @@ export class NotificationComponent implements OnInit {
       clearTimeout(this.timeout)
 
       this.timeout = setTimeout(() => {
-        this.notification = null
+        this.notifications = null
       }, notification.duration)
     })
   }
