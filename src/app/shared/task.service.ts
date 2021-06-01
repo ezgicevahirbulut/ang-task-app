@@ -44,7 +44,7 @@ export class TaskService implements OnDestroy{
   addtask(task:Task):any {
     //this.tasks.push(task)
 
-    this.task$.pipe([...this.task$.getValue(),task])
+    this.task$.next([...this.task$.getValue(),task])
     this.saveState()
   }
 
@@ -55,7 +55,7 @@ export class TaskService implements OnDestroy{
     this.saveState()
   }
 
-  deletetask(id: string){
+  deletetask(id: string): void{
 
   /*const taskIndex = this.task$.pipe(
       filter(tasks => tasks =! null),
@@ -79,10 +79,7 @@ export class TaskService implements OnDestroy{
 
     /*this.task$.splice(id,1);
     this.task$.next(this.task$.splice());*/
-
-    
-
-    this.task$.next(null)
+    this.task$.next(this.task$.getValue().filter(t => t.id !==id))
     
     this.saveState()
   }
@@ -107,7 +104,7 @@ export class TaskService implements OnDestroy{
     }
   }
 }
-function taskIndex(taskIndex: any, arg1: number) {
+/*function taskIndex(taskIndex: any, arg1: number) {
   throw new Error('Function not implemented.');
-}
+}*/
 

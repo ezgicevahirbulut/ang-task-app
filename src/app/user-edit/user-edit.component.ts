@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -12,26 +13,28 @@ import { NotificationService } from '../shared/notification.service';
   styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit {
-  
+
+
+  public user$:Observable<[]>
   constructor(private UserService: UserService,
     private route: ActivatedRoute,
     private router: Router,
     private notificationService: NotificationService) {
    }
 
-   user:User | undefined
+  
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       const userId = paramMap.get('id')
-      this.user = this.UserService.getuser(userId)
+      this.user$ = this.UserService.getuser(userId)
     })
   }
 
   onFormSubmit(form: NgForm) {
     const { name } = form.value
 
-    this.UserService.updateuser(this.user.id, {
+    this.UserService.updateuser(this.user$.id, {
       name
     })
 

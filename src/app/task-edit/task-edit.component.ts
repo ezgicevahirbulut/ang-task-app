@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import  'rxjs/Rx';
+
 import { NotificationService } from '../shared/notification.service';
 import { Task } from '../shared/task.model';
 import { TaskService } from '../shared/task.service';
@@ -15,6 +17,7 @@ export class TaskEditComponent implements OnInit {
 
   public task$:Observable<Task[]>
 
+ 
 
   constructor(
     private route: ActivatedRoute,
@@ -22,16 +25,18 @@ export class TaskEditComponent implements OnInit {
     private router:Router,
     private notificatiosService:NotificationService)  { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       const idParam = paramMap.get('id')
-      this.task$ = this.taskService.gettask(idParam)
+      
     })
+
     
   }
 
   onFormSubmit(form: NgForm) {
+   
     this.taskService.updatetask(this.task$.id, form.value)
     this.router.navigateByUrl("/tasks")
 
