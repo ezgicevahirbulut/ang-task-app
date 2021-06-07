@@ -2,7 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
 import { RouterOutlet } from '@angular/router';
 import { Observable, timer } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { map } from 'rxjs/operators';
 
 
 const baseStyles = style({
