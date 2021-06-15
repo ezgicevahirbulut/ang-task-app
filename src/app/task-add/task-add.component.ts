@@ -36,5 +36,5 @@ export class TaskAddComponent implements OnInit {
     this.taskService.addtask(task)
     this.router.navigateByUrl("/task")
     this.notificationService.show('Created task')
-  }
+  },
 }
